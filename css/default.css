@@ -1,0 +1,220 @@
+.navbar-default {
+    background-color: #263238;
+    border-color: #455A64;
+    border-radius: 0;
+}
+.navbar-brand{
+    padding: 22px 15px;
+    font-family: 'Open Sans', sans-serif;
+    height:auto;
+    color: #e91e63 !important;
+    font-size: 32px;
+}
+
+.search {
+    background: #3f5058;
+    border: 1px solid #46555d;
+    color: #90a4ae;
+}
+.search-form{
+    position: relative;
+}
+.suggest{
+    position: absolute;
+    z-index: 5;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.suggest div{
+    display: block;
+    padding: 5px 15px;
+    border-bottom:1px dashed #ddd;
+    min-width: 300px;
+}
+.navbar-default .navbar-nav>li>a{
+    font-family: 'Open Sans', sans-serif;
+    padding: 22px 15px;
+    color: #90a4ae;
+}
+.navbar-default .navbar-nav>li>a:hover{
+    color: #fff;
+}
+.file-info {
+    font-size: 12px;
+}
+
+.movie h5 {
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 100;
+    min-height: 38px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.movie {
+    margin-bottom: 50px;
+}
+
+.movie .thumbnail {
+    width: 100%;
+    height: 100%;
+}
+
+.thumb-container {
+    width: 100%;
+    height: 230px;
+}
+
+.mv-info-con {
+    font-size: 11px;
+    padding: 0;
+    line-height: 18px;
+    min-height: 75px;
+}
+.glyphicon {
+    padding-right:5px;
+}
+.mv-count {
+    margin: 22px 15px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #009688;
+}
+.mv-info-con .rating {
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+    padding-bottom:4px;
+    margin-bottom:10px;
+    color: #f57c00 !important;
+}
+
+.mv-info-con li {
+    list-style: none;
+    padding: 0;
+    padding-bottom:5px;
+    color: #90a4ae;
+    max-height: 22px;
+    overflow: hidden;
+}
+.btn.mv-btn {
+    border-radius: 0;
+    background-color: #2e7d32;
+    text-transform: uppercase;
+    border: 1px solid #2e7d32;
+}
+.quality{
+    float: right;
+    text-transform: uppercase;
+    color: #8bc34a;
+    font-weight: 600;
+    text-align: center;
+}
+.modal-content{
+    border-radius: 0;
+}
+.modal-body{
+    font-family: 'Open Sans', sans-serif;
+}
+.modal-body .mv-info-con{
+    font-size: 14px;
+}
+.modal-body .mv-info-con li {
+    padding-bottom: 10px;
+    max-height: inherit;
+    color: #607d8b;
+}
+
+/*Other*/
+.info {
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 12px;
+    color: #204d74;
+}
+.info span{
+    margin-left: 10px;
+}
+.input-sm.rip-type {
+    width: 110px;
+    display: inline-block;
+    height: 22px;
+    line-height: 15px;
+    font-size: 12px;
+    padding: 3px;
+    margin-right: 15px;
+    float: right;
+}
+.input-sm.imdb-id{
+    width: 65px;
+    font-weight: normal;
+    display: inline-block;
+    text-align: center;
+    height: 22px;
+    line-height: 15px;
+    font-size: 12px;
+    padding: 3px;
+    margin-right: 15px;
+    border-radius: 0;
+}
+.info-wrap{
+    border:1px solid #ccc;
+    padding:3px 8px;
+    display: inline-block;
+    text-align: center;
+}
+.info-wrap .glyphicon-ok-circle{
+    color: #8bc34a;;
+}
+.controls{
+    font-size: 12px;
+    float: right;
+    line-height: 18px;
+}
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .thumb-container{
+        height: 190px;
+    }
+    .movie h5 {
+        min-height: 55px;
+    }
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+    .thumb-container{
+        height: 310px;
+    }
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+    .thumb-container{
+        height: auto;
+    }
+    .movie h5 {
+        font-size: 18px;
+        line-height: 26px;
+    }
+    .mv-info-con {
+        font-size: 14px;
+        line-height: 22px;
+    }
+    .mv-info-con li {
+        max-height: inherit;
+    }
+    .modal-body h2{
+        font-size: 16px;
+    }
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+
+}
