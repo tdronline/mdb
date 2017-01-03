@@ -103,6 +103,23 @@
     text-transform: uppercase;
     border: 1px solid #2e7d32;
 }
+
+.popup-info {
+	position:relative;
+}
+
+.popup-info .watch {
+	position:absolute;
+	bottom: 90px;
+	right: 15px;
+}
+
+.popup-info .save-movie-info {
+	display: block;
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #4DB6AC;
+}
 .quality{
     float: right;
     text-transform: uppercase;

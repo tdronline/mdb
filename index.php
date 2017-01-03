@@ -69,5 +69,9 @@
             });
             return false;
         });
+		
+		$('body').on("click", ".close", function () {
+			$(".modal-body").empty();
+		});
     </script>
 <?php include("footer.php"); ?>
