@@ -24,7 +24,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">mDB</a><div class="navbar-text mv-count"><?php echo movieCount(); ?> +</div>
+      <a class="navbar-brand" href=".">mDB</a><div class="navbar-text mv-count"><?php echo movieCount(); ?> +</div>
     </div>
     <form class="navbar-form navbar-text search-form">
       <input type="search" class="form-control search " id="search" placeholder="Search Movies" />
@@ -33,9 +33,6 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="search-movies.php">Add Movies</a></li>
-        <li><a href="#">ENGLISH</a></li>
-		<li><a href="#">HINDI</a></li>
-		<li><a href="#">OTHER</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

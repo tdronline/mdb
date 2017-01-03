@@ -5,29 +5,32 @@ $video_ext = array('mp4', 'mpeg', 'avi', 'mpg', 'mov','mkv');
 $Q = "SELECT title, rel_year FROM movielist";
 $res = $db->query($Q);
 
+//Fetch movies in Database
 while ($mv = $res->fetch_assoc()) {
     $mvName = $mv['title'] . ' [' . $mv['rel_year'] . ']';
     $mvArray[] = $mvName;
 }
-if (empty($lang)) {
-    $lang = 'english';
-}
 
-$dir = MV_PATH . DIRECTORY_SEPARATOR . $lang;
-$files = scandir($dir);
+foreach(LANGUAGES as $lang) {
+    echo $lang;
+    if (empty($lang)) { $lang = 'english'; }
 
-foreach ($files as $file) {
-    if (in_array($file, array('..', '.'))) {
-        continue;
-    }
-    if (!in_array($file, $mvArray)) {
-        if (!is_file($dir . DIRECTORY_SEPARATOR . $file)) {
-            $mTitiles[] = $file;
+    $dir = MV_PATH . DIRECTORY_SEPARATOR . $lang;
+    $files = scandir($dir);
+
+    foreach ($files as $file) {
+        if (in_array($file, array('..', '.'))) {
+            continue;
+        }
+        if (!in_array($file, $mvArray)) {
+            if (!is_file($dir . DIRECTORY_SEPARATOR . $file)) {
+                $mTitiles[] = $lang.'/'.$file;
+            }
         }
     }
 }
-
 ?>
+
 <div class="container">
 <?php
 // Start traversing
@@ -36,8 +39,10 @@ if(is_array($mTitiles)) {
     $mTitiles = array_slice($mTitiles, 0, 10);
 
     foreach ($mTitiles as $mfolder) {
-        $mtitle = preg_replace("/[<>:\"\/\\|?*]/", " ", $mfolder);
-        $n = preg_split('/\d{4}/', $mfolder);
+        $fp = explode('/',$mfolder);
+        $mfname = $fp[1];
+        $mtitle = preg_replace("/[<>:\"\/\\|?*]/", " ", $mfname);
+        $n = preg_split('/\d{4}/', $mfname);
         $mTitle = $n[0];
 
         //Get IMDB Info
@@ -51,7 +56,7 @@ if(is_array($mTitiles)) {
         $_SESSION["movie"][$mid]['folder'] = $mfolder;
 
         // Video File Name
-        $apth = $dir . DIRECTORY_SEPARATOR . $mfolder . DIRECTORY_SEPARATOR;
+        $apth = MV_PATH . DIRECTORY_SEPARATOR . $mfolder . DIRECTORY_SEPARATOR;
         $movieFiles = scandir($apth);
         foreach ($movieFiles as $mfile) {
             if (in_array(pathinfo($apth . $mfile, PATHINFO_EXTENSION), $video_ext)) {
@@ -101,6 +106,7 @@ if(is_array($mTitiles)) {
 }
     ?>
 </div>
+
 <script type="text/javascript">
     //ajax Add movie to databse
     $('body').on("click", "a.add-mv", function () {

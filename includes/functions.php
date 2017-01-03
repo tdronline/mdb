@@ -104,7 +104,7 @@ function getIMDBinfo($mvTitle)
 {
     $oIMDB = new IMDB($mvTitle);
     if ($oIMDB->isReady) {
-        $folderName = $oIMDB->getTitle() . " [" . $oIMDB->getYear() . "]";
+        $folderName = $oIMDB->getTitle(false) . " [" . $oIMDB->getYear() . "]";
         $folderName = preg_replace('/[\:\"\<\>\*]/', ' - ', $folderName);
         $mvTitle = $oIMDB->getTitle() . " " . $oIMDB->getYear();
         $mvRating = $oIMDB->getRating();
@@ -114,7 +114,7 @@ function getIMDBinfo($mvTitle)
         $mid = substr(end($i), 2);
 
         $mInfo = array(
-            "title" => $oIMDB->getTitle(),
+            "title" => $oIMDB->getTitle(false),
             "runtime" => $oIMDB->getRuntime(),
             "poster" => $oIMDB->getPoster('big'),
             "year" => $oIMDB->getYear(),

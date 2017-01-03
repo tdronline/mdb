@@ -18,14 +18,16 @@ if(isset($_SESSION["movie"])) {
 
     //Set Movie Folder Path
     if (empty($lang)) { $lang = 'english'; }
-    $dir = MV_PATH . DIRECTORY_SEPARATOR . $lang;
     $mvDIR = $mv['title'] . " [" . $mv['year'] . "]";
     $mvDIR = preg_replace("/[<>:\"\/\\|?*]/", ' - ', $mvDIR);
-    $folderPath = $dir . DIRECTORY_SEPARATOR . $mv['folder'];
+    $mvp = explode('/',$mv['folder']);
+    $lang = $mvp[0];
+    $folderPath = MV_PATH . DIRECTORY_SEPARATOR . $mv['folder'];
+    $folderPath = str_replace('/',DIRECTORY_SEPARATOR,$folderPath);
 
     // Create target dir
     if (file_exists($folderPath)) {
-       if (rename($folderPath, $dir . DIRECTORY_SEPARATOR . $mvDIR)) {
+       if (rename($folderPath, MV_PATH . DIRECTORY_SEPARATOR . $lang. DIRECTORY_SEPARATOR .$mvDIR)) {
             $renameOK = TRUE;
             echo "<div class='info-wrap'>
                     <span class='glyphicon glyphicon-folder-open' aria-hidden='true'></span>
