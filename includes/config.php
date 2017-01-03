@@ -16,13 +16,15 @@ if (mysqli_connect_errno()) {
 //Disk Containing Movies
 define("MV_PATH",'Z:'.DIRECTORY_SEPARATOR.'movies');
 //define("MV_PATH",'E:'.DIRECTORY_SEPARATOR.'Movies');
-define("WEB_URL",'http://www.mdb.lk');
+define("WEB_URL","http://".$_SERVER['SERVER_NAME']);
+define("LANGUAGES",array("english","hindi","sinhala","tamil"));
+
 #################################
-#		Folder Structure						#
-#		Drive 				Z:						#
-#		Movie Folder	movies				#
-#		Language			english				#
-#		Movie Name		ABCD [2013]		#
+#		Folder Structure            #
+#		Drive 				    Z:  #
+#		Movie Folder	    movies  #
+#		Language			english #
+#		Movie Name		ABCD [2013] #
 #################################
 require_once("includes/imdb.class.php");
 require_once("functions.php");

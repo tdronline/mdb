@@ -27,7 +27,7 @@ if (is_numeric($mID)) {
     echo "<div class='row'>
 	<div class='col-lg-4'>
 	  <img class='img-rounded'  style='width: 100%;' src='$cover'>
-	</div><div class='col-lg-8'>";
+	</div><div class='col-lg-8 popup-info'>";
     $title = $f->title . " [{$f->rel_year}]";
     echo "<h2>$title</h2>
 <ul class='mv-info-con'>
@@ -40,6 +40,7 @@ if (is_numeric($mID)) {
 	<li><strong>Relese Date:</strong> {$in['relesed']}</li>
 </ul><hr>";
     //if(isset($_SESSION['user'])){
+	echo "<span class='save-movie-info'>To save movie Right click and choose save file as.</span>";
     dLink($location, $title, $lang);
     //}
     echo "</div></div>";

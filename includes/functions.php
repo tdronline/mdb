@@ -169,20 +169,23 @@ function dLink($location, $title, $lang)
 {
 	$lang = 'english';
 	$extensions = array('mkv','mp4','mpeg','mpg','avi','mov');
+
 	//Setup our new file path
     $folderPath = MV_PATH . DIRECTORY_SEPARATOR . $lang . DIRECTORY_SEPARATOR;
 	$moviefolder = $folderPath . $title;
+
 	//echo $moviefolder;
 	if(is_dir($moviefolder)) {
 		$files = scandir($moviefolder);
 		foreach ($files as $file) {
 			@$f_ext = end(explode('.', $file));
 			if(in_array($f_ext, $extensions)) {
-				$file_link = $moviefolder . DIRECTORY_SEPARATOR .$file;
-				echo "<a href='$file_link' class='btn btn-primary' >$file</a>";
+				$movie_path = $lang.'/'.$title.'/'.$file;
+				$file_link = WEB_URL . "/movies/".$movie_path;
+				echo "<a href=\"$file_link\" class='btn btn-primary' >$file</a>";
                 if($file) {
-                    $mvpath = base64_encode($lang.'/'.$title.'/'.$file);
-                    echo " <a href='video.php?mv=$mvpath' class='btn btn-success mv-btn' >Watch</a>";
+                    $mvpath = base64_encode($movie_path);
+                    echo " <a href='video.php?mv=$mvpath' class='btn btn-success mv-btn watch' >Watch Movie</a>";
                 }
 			}
 		}

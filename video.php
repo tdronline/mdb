@@ -2,7 +2,7 @@
 <?php
 $movie = base64_decode(trim($_REQUEST['mv']));
 $mvp = explode("/",$movie);
-$filePath = WEB_URL.'/movies/'.$movie;
+$filePath = WEB_URL .'/movies/'.$movie;
 ?>
 <head>
     <link href="css/video-js.css" rel="stylesheet">
