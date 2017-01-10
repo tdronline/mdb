@@ -50,7 +50,7 @@ if($renameOK == TRUE) {
     $rating = $mv['rating'];
     $genre = $mv['genre'];
     $lang = $mv['language'];
-    $location = $mv['year'];
+    $location = $mv['location'];
     $rip = addslashes($ripType);
     $info = serialize($mv);
     $info = addslashes($info);

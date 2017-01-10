@@ -12,7 +12,6 @@ while ($mv = $res->fetch_assoc()) {
 }
 
 foreach(LANGUAGES as $lang) {
-    echo $lang;
     if (empty($lang)) { $lang = 'english'; }
 
     $dir = MV_PATH . DIRECTORY_SEPARATOR . $lang;
@@ -54,6 +53,7 @@ if(is_array($mTitiles)) {
         $mvRating = $mInfo['rating'];
         $mvURL = "http://www.imdb.com/title/tt$mid";
         $_SESSION["movie"][$mid]['folder'] = $mfolder;
+        $_SESSION["movie"][$mid]['location'] = $fp[0];
 
         // Video File Name
         $apth = MV_PATH . DIRECTORY_SEPARATOR . $mfolder . DIRECTORY_SEPARATOR;

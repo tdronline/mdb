@@ -42,6 +42,7 @@ function displayThumb($mID)
 {
     $Q = "SELECT * FROM `movielist` WHERE `imdb` LIKE '$mID'";
     $mv = getResult($Q);
+	$rating = ''; $quality ='';
 
     if (strlen($mv->title) > 40) {
         $mv_name = substr($mv->title, 0, 40) . "...";
@@ -165,13 +166,12 @@ function movieCount()
     return $total_records;
 }
 
-function dLink($location, $title, $lang) 
+function dLink($location = 'english', $title)
 {
-	$lang = 'english';
 	$extensions = array('mkv','mp4','mpeg','mpg','avi','mov');
 
 	//Setup our new file path
-    $folderPath = MV_PATH . DIRECTORY_SEPARATOR . $lang . DIRECTORY_SEPARATOR;
+    $folderPath = MV_PATH . DIRECTORY_SEPARATOR . $location . DIRECTORY_SEPARATOR;
 	$moviefolder = $folderPath . $title;
 
 	//echo $moviefolder;
@@ -180,7 +180,7 @@ function dLink($location, $title, $lang)
 		foreach ($files as $file) {
 			@$f_ext = end(explode('.', $file));
 			if(in_array($f_ext, $extensions)) {
-				$movie_path = $lang.'/'.$title.'/'.$file;
+				$movie_path = $location.'/'.$title.'/'.$file;
 				$file_link = WEB_URL . "/movies/".$movie_path;
 				echo "<a href=\"$file_link\" class='btn btn-primary' >$file</a>";
                 if($file) {

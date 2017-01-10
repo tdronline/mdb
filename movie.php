@@ -41,7 +41,7 @@ if (is_numeric($mID)) {
 </ul><hr>";
     //if(isset($_SESSION['user'])){
 	echo "<span class='save-movie-info'>To save movie Right click and choose save file as.</span>";
-    dLink($location, $title, $lang);
+    dLink($location, $title);
     //}
     echo "</div></div>";
 } else {
