@@ -86,6 +86,8 @@
                                 <option value=""> Order </option>
                                 <option value="rel_year DESC">Year Latest</option>
                                 <option value="rel_year ASC">Year Oldest</option>
+                                <option value="rating DESC">Highest Rating</option>
+                                <option value="rating ASC">Lowest Rating</option>
                             </select>
                         </div>
                         <div class="form-group col-md-2">

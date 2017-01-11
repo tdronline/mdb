@@ -201,7 +201,6 @@ function search($quality,$genre,$rating,$lang,$order){
     if (!empty($order)){$q_order = $order;} else{$q_order = 'rel_year';}
     $Q = "SELECT * FROM `movielist` WHERE 1 $q_quality $q_genre $q_rating $q_lang ORDER BY $q_order";
     $res = $db->query($Q);
-    echo $Q;
     if ($res->num_rows > 0) {
         return $res;
     }
