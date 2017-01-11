@@ -59,10 +59,9 @@
                             <select class="form-control" id="genre">
                                 <option value=""> Genre </option>
                                 <?php
-                                $gen = uniqueValues('genre');
-                                while ($g = $gen->fetch_object()) {
-                                    $genre_label = $g->genre;
-                                    echo "<option value=\"$genre_label\">$genre_label</option>";
+                                $gen = filterGenre();
+                                foreach($gen as $genre) {
+                                    echo "<option value=\"$genre\">$genre</option>";
                                 }
                                 ?>
                             </select>

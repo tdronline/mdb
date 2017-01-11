@@ -212,3 +212,14 @@ function uniqueValues($colomn){
     $res = $db->query($Q);
     return $res;
 }
+
+function filterGenre(){
+    $gen = uniqueValues('genre');
+    while ($g = $gen->fetch_object()) {
+        $genre_label = $g->genre;
+        $genre_label .= $genre_label.",";
+    }
+    $gen_array = explode(",",$genre_label);
+    $genre = array_unique($gen_array);
+    return array_filter($genre);
+}
