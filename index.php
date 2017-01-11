@@ -1,5 +1,5 @@
 <?php include("header.php"); ?>
-    <div class="container container-fluid">
+    <div class="container container-fluid" id="mv-content">
         <?php
         if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }
         $num_rec_per_page=48;
@@ -26,29 +26,7 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" language="javascript" src="js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" language="javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        $("#search").keyup(function () {
-            $.ajaxSetup({cache: false});
-            var ajax_load = "<img src='img/load.gif' alt='loading...' />";
-            var loadUrl = "search.php";
-            if ($("#search").val() == '') {
-                $("#suggest").fadeOut('fast');
-                return;
-            }
-            $("#result").html(ajax_load);
-            $.post(
-                loadUrl,
-                {s: $("#search").val()},
-                function (responseText) {
-                    $("#suggest").slideDown('fast');
-                    $("#suggest").html(responseText);
-                },
-                "html"
-            );
-        });
-
         //ajax movie details
         $('body').on("click", "a.mv-btn", function () {
             var pagerequest = $(this).attr('href');

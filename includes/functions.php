@@ -191,4 +191,25 @@ function dLink($location = 'english', $title)
 		}
 	}
 }
-?>
+
+function search($quality,$genre,$rating,$lang,$order){
+    global $db;
+    if (!empty($quality)){$q_quality = "AND `rip_type` = '$quality'";} else{$q_quality ='';}
+    if (!empty($genre)){$q_genre = "AND `genre` LIKE '%$genre%'";} else{$q_genre ='';}
+    if (!empty($rating)){$q_rating = "AND `rating` >= '$rating'";} else{$q_rating ='';}
+    if (!empty($lang)){$q_lang = "AND `location` = '$lang'";} else{$q_lang = '';}
+    if (!empty($order)){$q_order = $order;} else{$q_order = 'rel_year';}
+    $Q = "SELECT * FROM `movielist` WHERE 1 $q_quality $q_genre $q_rating $q_lang ORDER BY $q_order";
+    $res = $db->query($Q);
+    echo $Q;
+    if ($res->num_rows > 0) {
+        return $res;
+    }
+}
+
+function uniqueValues($colomn){
+    $Q = "SELECT DISTINCT($colomn) FROM `movielist`";
+    global $db;
+    $res = $db->query($Q);
+    return $res;
+}

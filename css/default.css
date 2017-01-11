@@ -31,6 +31,28 @@
     border-bottom:1px dashed #ddd;
     min-width: 300px;
 }
+.filter {
+    padding: 5px;
+    border: 1px solid #455a64;
+    line-height: 20px;
+    border-radius: 5px;
+    top: 3px;
+}
+.filter-container {
+    display: none;
+    background-color: rgba(38, 50, 56, 0.8);
+    padding: 15px;
+    position: absolute;
+    z-index: 5;
+    left: 0;
+    right:0;
+    top: 67px;
+    width: 100%;
+}
+.filter-container .form-control{
+    width: 100%;
+}
+
 .navbar-default .navbar-nav>li>a{
     font-family: 'Open Sans', sans-serif;
     padding: 22px 15px;
