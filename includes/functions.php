@@ -42,7 +42,8 @@ function displayThumb($mID)
 {
     $Q = "SELECT * FROM `movielist` WHERE `imdb` LIKE '$mID'";
     $mv = getResult($Q);
-	$rating = ''; $quality ='';
+    $rating = '';
+    $quality = '';
 
     if (strlen($mv->title) > 40) {
         $mv_name = substr($mv->title, 0, 40) . "...";
@@ -51,7 +52,7 @@ function displayThumb($mID)
     }
     $title = $mv_name . " [" . $mv->rel_year . "]";
     $rating = $mv->rating;
-    $info = unserialize($mv->info);
+    $info = @unserialize($mv->info);
     if (!empty($mv->rip_type)) {
         $quality = "<div class='quality'>{$mv->rip_type}</div>";
     }
@@ -144,13 +145,13 @@ function getIMDBinfo($mvTitle)
     }
 }
 
-function delFiles($dir) 
-{ 
-   $files = array_diff(scandir($dir), array('.','..')); 
-    foreach ($files as $file) { 
-      (is_dir("$dir/$file")) ? delFiles("$dir/$file") : unlink("$dir/$file"); 
-    }  
-	if (rmdir($dir)) {
+function delFiles($dir)
+{
+    $files = array_diff(scandir($dir), array('.', '..'));
+    foreach ($files as $file) {
+        (is_dir("$dir/$file")) ? delFiles("$dir/$file") : unlink("$dir/$file");
+    }
+    if (rmdir($dir)) {
         return 1;
     } else {
         return 0;
@@ -168,37 +169,58 @@ function movieCount()
 
 function dLink($location = 'english', $title)
 {
-	$extensions = array('mkv','mp4','mpeg','mpg','avi','mov');
+    $extensions = array('mkv', 'mp4', 'mpeg', 'mpg', 'avi', 'mov');
 
-	//Setup our new file path
+    //Setup our new file path
     $folderPath = MV_PATH . DIRECTORY_SEPARATOR . $location . DIRECTORY_SEPARATOR;
-	$moviefolder = $folderPath . $title;
+    $moviefolder = $folderPath . $title;
 
-	//echo $moviefolder;
-	if(is_dir($moviefolder)) {
-		$files = scandir($moviefolder);
-		foreach ($files as $file) {
-			@$f_ext = end(explode('.', $file));
-			if(in_array($f_ext, $extensions)) {
-				$movie_path = $location.'/'.$title.'/'.$file;
-				$file_link = WEB_URL . "/movies/".$movie_path;
-				echo "<a href=\"$file_link\" class='btn btn-primary' >$file</a>";
-                if($file) {
+    //echo $moviefolder;
+    if (is_dir($moviefolder)) {
+        $files = scandir($moviefolder);
+        foreach ($files as $file) {
+            @$f_ext = end(explode('.', $file));
+            if (in_array($f_ext, $extensions)) {
+                $movie_path = $location . '/' . $title . '/' . $file;
+                $file_link = WEB_URL . "/movies/" . $movie_path;
+                echo "<a href=\"$file_link\" class='btn btn-primary' >$file</a>";
+                if ($file) {
                     $mvpath = base64_encode($movie_path);
                     echo " <a href='video.php?mv=$mvpath' class='btn btn-success mv-btn watch' >Watch Movie</a>";
                 }
-			}
-		}
-	}
+            }
+        }
+    }
 }
 
-function search($quality,$genre,$rating,$lang,$order){
+function search($quality, $genre, $rating, $lang, $order)
+{
     global $db;
-    if (!empty($quality)){$q_quality = "AND `rip_type` = '$quality'";} else{$q_quality ='';}
-    if (!empty($genre)){$q_genre = "AND `genre` LIKE '%$genre%'";} else{$q_genre ='';}
-    if (!empty($rating)){$q_rating = "AND `rating` >= '$rating'";} else{$q_rating ='';}
-    if (!empty($lang)){$q_lang = "AND `location` = '$lang'";} else{$q_lang = '';}
-    if (!empty($order)){$q_order = $order;} else{$q_order = 'rel_year';}
+    if (!empty($quality)) {
+        $q_quality = "AND `rip_type` = '$quality'";
+    } else {
+        $q_quality = '';
+    }
+    if (!empty($genre)) {
+        $q_genre = "AND `genre` LIKE '%$genre%'";
+    } else {
+        $q_genre = '';
+    }
+    if (!empty($rating)) {
+        $q_rating = "AND `rating` >= '$rating'";
+    } else {
+        $q_rating = '';
+    }
+    if (!empty($lang)) {
+        $q_lang = "AND `location` = '$lang'";
+    } else {
+        $q_lang = '';
+    }
+    if (!empty($order)) {
+        $q_order = $order;
+    } else {
+        $q_order = 'rel_year';
+    }
     $Q = "SELECT * FROM `movielist` WHERE 1 $q_quality $q_genre $q_rating $q_lang ORDER BY $q_order";
     $res = $db->query($Q);
     if ($res->num_rows > 0) {
@@ -206,20 +228,22 @@ function search($quality,$genre,$rating,$lang,$order){
     }
 }
 
-function uniqueValues($colomn){
+function uniqueValues($colomn)
+{
     $Q = "SELECT DISTINCT($colomn) FROM `movielist`";
     global $db;
     $res = $db->query($Q);
     return $res;
 }
 
-function filterGenre(){
+function filterGenre()
+{
     $gen = uniqueValues('genre');
     while ($g = $gen->fetch_object()) {
         $genre_label = $g->genre;
-        $genre_label .= $genre_label.",";
+        $genre_label .= $genre_label . ",";
     }
-    $gen_array = explode(",",$genre_label);
+    $gen_array = explode(",", $genre_label);
     $genre = array_unique($gen_array);
     return array_filter($genre);
 }

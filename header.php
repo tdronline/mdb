@@ -1,5 +1,14 @@
 <?php session_start(); ?>
-<?php require_once("includes/config.php"); ?>
+<?php if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+}else {
+    $us = @$_GET['logout'];
+    if($us == 'true') {
+        session_destroy();
+        header("Location: .");
+    }
+}
+require_once("includes/config.php"); ?>
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
 <head>
@@ -36,7 +45,12 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
+                <?php if($_SESSION['user']['type'] == 'admin'){?>
                 <li><a href="search-movies.php">Add Movies</a></li>
+                <?php } ?>
+                <?php if($_SESSION['user']){?>
+                <li><a href="?logout=true">Logout</a></li>
+                <?php } ?>
             </ul>
         </div><!-- /.navbar-collapse -->
         <div class="filter-container">
@@ -45,22 +59,22 @@
                     <form class="">
                         <div class="form-group col-md-2">
                             <select class="form-control" id="quality">
-                                <option value=""> Quality </option>
+                                <option value=""> Quality</option>
                                 <?php
                                 $quality = uniqueValues('rip_type');
                                 while ($rip = $quality->fetch_object()) {
                                     $rip_label = $rip->rip_type;
-                                    echo "<option value=\"$rip_label\">".strtoupper($rip_label)."</option>";
+                                    echo "<option value=\"$rip_label\">" . strtoupper($rip_label) . "</option>";
                                 }
                                 ?>
                             </select>
                         </div>
                         <div class="form-group col-md-2">
                             <select class="form-control" id="genre">
-                                <option value=""> Genre </option>
+                                <option value=""> Genre</option>
                                 <?php
                                 $gen = filterGenre();
-                                foreach($gen as $genre) {
+                                foreach ($gen as $genre) {
                                     echo "<option value=\"$genre\">$genre</option>";
                                 }
                                 ?>
@@ -68,21 +82,21 @@
                         </div>
                         <div class="form-group col-md-2">
                             <select class="form-control" id="rating">
-                                <option value=""> Rating </option>
-                                <option value="9"> 9+ </option>
-                                <option value="8"> 8+ </option>
-                                <option value="7"> 7+ </option>
-                                <option value="6"> 6+ </option>
-                                <option value="5"> 5+ </option>
-                                <option value="4"> 4+ </option>
-                                <option value="3"> 3+ </option>
-                                <option value="2"> 2+ </option>
-                                <option value="1"> 1+ </option>
+                                <option value=""> Rating</option>
+                                <option value="9"> 9+</option>
+                                <option value="8"> 8+</option>
+                                <option value="7"> 7+</option>
+                                <option value="6"> 6+</option>
+                                <option value="5"> 5+</option>
+                                <option value="4"> 4+</option>
+                                <option value="3"> 3+</option>
+                                <option value="2"> 2+</option>
+                                <option value="1"> 1+</option>
                             </select>
                         </div>
                         <div class="form-group col-md-2">
                             <select class="form-control" id="order">
-                                <option value=""> Order </option>
+                                <option value=""> Order</option>
                                 <option value="rel_year DESC">Year Latest</option>
                                 <option value="rel_year ASC">Year Oldest</option>
                                 <option value="rating DESC">Highest Rating</option>
@@ -91,12 +105,12 @@
                         </div>
                         <div class="form-group col-md-2">
                             <select class="form-control" id="lang">
-                                <option value=""> Language </option>
+                                <option value=""> Language</option>
                                 <?php
                                 $lang = uniqueValues('location');
                                 while ($lg = $lang->fetch_object()) {
                                     $lang_label = $lg->location;
-                                    echo "<option value=\"$lang_label\">".ucfirst($lang_label)."</option>";
+                                    echo "<option value=\"$lang_label\">" . ucfirst($lang_label) . "</option>";
                                 }
                                 ?>
                             </select>
